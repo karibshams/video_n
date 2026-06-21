@@ -1,16 +1,3 @@
-"""
-video_engine.py
-----------------
-Core engine for generating car-listing videos from photos + a text description
-using Seedance v1.5 Fast (via fal.ai).
-
-Design:
-- Single class, single public method (`generate`) -> easy to swap models later.
-- Long videos (>12s) are built by firing multiple short clips IN PARALLEL,
-  then stitching them with FFmpeg, so total wait stays near the single-clip time.
-- No audio is ever generated (generate_audio is hardcoded False).
-"""
-
 import os
 import time
 import uuid
