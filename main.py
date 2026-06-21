@@ -1,13 +1,3 @@
-"""
-main.py
--------
-Entry point. Shows how to use CarVideoEngine to turn car photos + a
-description into a finished silent promotional video.
-
-Run:
-    python main.py
-"""
-
 from video_engine import CarVideoEngine, VideoRequest
 
 
