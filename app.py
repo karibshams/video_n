@@ -1,16 +1,3 @@
-"""
-app.py
-------
-Simple Streamlit app to TEST the CarVideoEngine visually.
-
-Upload 1-10 car photos, write a description, choose duration -> watch the
-generated video right in the browser. This is for testing only (uses your
-free fal.ai credit) - it is not the production mobile app.
-
-Run:
-    streamlit run app.py
-"""
-
 import os
 import tempfile
 import streamlit as st
