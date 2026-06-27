@@ -1,3 +1,13 @@
+"""
+main.py
+-------
+Entry point. Shows how to use CarVideoEngine to turn car photos + a
+description into a finished silent promotional video.
+
+Run:
+    python main.py
+"""
+
 from video_engine import CarVideoEngine, VideoRequest
 
 
@@ -15,7 +25,7 @@ def main():
             "Showcase exterior shine, alloy wheels, and spacious interior."
         ),
         total_duration=20,   # any value 10-30 is accepted
-        resolution="1080p",
+        resolution="720p",   # "720p" for quality, "480p" for faster/cheaper testing
     )
 
     print(f"Generating {request.total_duration}s video (job {request.job_id})...")
