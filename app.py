@@ -1,3 +1,16 @@
+"""
+app.py
+------
+Simple Streamlit app to TEST the CarVideoEngine visually.
+
+Upload 1-10 car photos, write a description, choose duration -> watch the
+generated video right in the browser. This is for testing only (uses your
+free fal.ai credit) - it is not the production mobile app.
+
+Run:
+    streamlit run app.py
+"""
+
 import os
 import tempfile
 import streamlit as st
@@ -41,7 +54,7 @@ col1, col2 = st.columns(2)
 with col1:
     duration = st.slider("Video duration (seconds)", min_value=10, max_value=30, value=15, step=1)
 with col2:
-    resolution = st.selectbox("Resolution", ["1080p", "720p"])
+    resolution = st.selectbox("Resolution", ["720p", "480p"], help="720p = better quality | 480p = faster & cheaper for testing")
 
 estimated_cost = round(duration * 0.022, 3)
 st.info(f"Estimated cost for this test: **${estimated_cost}** (Seedance v1.5 Fast, $0.022/sec)")
