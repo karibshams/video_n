@@ -1,3 +1,16 @@
+"""
+video_engine.py
+----------------
+Core engine for generating car-listing videos from photos + a text description
+using Seedance v1.5 Fast (via fal.ai).
+
+Design:
+- Single class, single public method (`generate`) -> easy to swap models later.
+- Long videos (>12s) are built by firing multiple short clips IN PARALLEL,
+  then stitching them with FFmpeg, so total wait stays near the single-clip time.
+- No audio is ever generated (generate_audio is hardcoded False).
+"""
+
 import os
 import time
 import uuid
@@ -15,8 +28,9 @@ load_dotenv()
 # Configuration
 # ---------------------------------------------------------------------------
 
-FAL_MODEL_ENDPOINT = "fal-ai/bytedance/seedance/v1.5/fast/image-to-video"
-MAX_CLIP_SECONDS = 12          # hard model limit per single call
+FAL_MODEL_ENDPOINT = "fal-ai/bytedance/seedance/v1.5/pro/image-to-video"
+MAX_CLIP_SECONDS = 12          # hard model limit per single call (4–12s supported)
+VALID_RESOLUTIONS = ["480p", "720p"]   # 480p = faster/cheaper; 720p = final output
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", "outputs")
 
 
@@ -26,7 +40,7 @@ class VideoRequest:
     image_urls: List[str]                     # 1-10 car photo URLs (hosted, publicly reachable)
     description: str = ""                     # optional text description
     total_duration: int = 15                   # desired final video length, 10-30s
-    resolution: str = "1080p"                  # "720p" or "1080p"
+    resolution: str = "720p"                   # "480p" (faster/cheaper) or "720p" (final output)
     job_id: str = field(default_factory=lambda: uuid.uuid4().hex[:10])
 
     def __post_init__(self):
